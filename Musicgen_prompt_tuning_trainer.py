@@ -107,7 +107,7 @@ class MusicGenPromptTuner:
             logging_steps=5,
             learning_rate=learning_rate,
             per_device_train_batch_size=batch_size,
-            gradient_accumulation_steps=4,
+            gradient_accumulation_steps=2,
             num_train_epochs=num_epochs,
             save_strategy="no",
             report_to="wandb"
@@ -141,7 +141,7 @@ if __name__ == "__main__":
         prompt_vector = None
 
     # MusicGenPromptTuner 클래스 초기화
-    musicgen_prompt_tuner = MusicGenPromptTuner(prompt_length=10, prompt_vector=prompt_vector)
+    musicgen_prompt_tuner = MusicGenPromptTuner(prompt_length=30, prompt_vector=prompt_vector)
 
     # 생성된 데이터 셋 경로 (dataset 객체 정보 파일)
     dataset_path = r"./Datasets"
@@ -161,6 +161,6 @@ if __name__ == "__main__":
     musicgen_prompt_tuner.musicgen_model.to(device)
 
     # 학습 시작
-    musicgen_prompt_tuner.train(dataset_path=dataset_path, model_dir=model_path, vector_dir = vector_path, learning_rate=5e-5, batch_size=8, num_epochs=200)
+    musicgen_prompt_tuner.train(dataset_path=dataset_path, model_dir=model_path, vector_dir = vector_path, learning_rate=1e-5, batch_size=16, num_epochs=200)
 
 
